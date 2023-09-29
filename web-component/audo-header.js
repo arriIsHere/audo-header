@@ -1,7 +1,10 @@
 class AutoHeader extends HTMLElement {
     static _lastLevel = 1;
-    constructor() {
+    constructor(nextPrevOrSame) {
         super();
+
+        this.isNext = nextPrevOrSame > 0;
+        this.isPrev = nextPrevOrSame < 0;
     }
 
     //TODO: check back in the DOM instead of storing it.
@@ -15,18 +18,14 @@ class AutoHeader extends HTMLElement {
     }
 
     connectedCallback() {
-        //Check for the 'nextLevel' attr
-        const isNextLevel = this.hasAttribute('next-level');
-        const isPrevLevel = this.hasAttribute('prev-level');
-
         let lastLevel = AutoHeader.getLastLevel();
 
         // Advance next level if set and prevLevel is not set and we have not surpassed '6'
-        if(isNextLevel && !isPrevLevel && lastLevel < 6) {
+        if(this.isNext && lastLevel < 6) {
             lastLevel = lastLevel + 1;
         }
 
-        if(isPrevLevel && !isNextLevel && lastLevel > 1) {
+        if(this.isPrev && lastLevel > 1) {
             lastLevel = lastLevel - 1;
         }
 
@@ -46,6 +45,26 @@ class AutoHeader extends HTMLElement {
 }
 
 
-customElements.define('auto-header', 
-    AutoHeader
+customElements.define('h-next', 
+    class extends AutoHeader {
+        constructor() {
+            super(1)
+        }
+    }
+);
+
+customElements.define('h-prev', 
+    class extends AutoHeader {
+        constructor() {
+            super(-1);
+        }
+    }
+);
+
+customElements.define('h-same', 
+    class extends AutoHeader {
+        constructor() {
+            super(0);
+        }
+    }
 );
