@@ -1,0 +1,15 @@
+{
+  "name": "audo-header",
+  "version": "1.0.0",
+  "description": "Simple repo to automatically advance, go back and in general keep track of your header levels. Contains react and web component versions",
+  "main": "index.js",
+  "scripts": {
+    "dev": "browser-sync start -s web-component -f web-component"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.29.3"
+  }
+}
