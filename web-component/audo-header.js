@@ -34,13 +34,13 @@ class AutoHeader extends HTMLElement {
         //Set my level
         this.headerLevel = lastLevel;
 
-        document.addEventListener('DOMContentLoaded', () => {
-            //Manage the content (properly)
-            const realHeader = document.createElement(`h${this.headerLevel}`);
-            realHeader.innerHTML = this.innerHTML;
-            this.innerHTML = '';
-            this.appendChild(realHeader);
-        });
+        const realHeader = document.createElement(`h${this.headerLevel}`);
+        const slot = document.createElement('slot');
+        realHeader.appendChild(slot);
+
+        const shadowRoot = this.attachShadow({mode: 'open'});
+
+        shadowRoot.appendChild(realHeader);
     }
 }
 
