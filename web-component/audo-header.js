@@ -45,7 +45,7 @@ class AutoHeader extends HTMLElement {
 }
 
 
-customElements.define('h-next', 
+customElements.define('h-down', 
     class extends AutoHeader {
         constructor() {
             super(1)
@@ -53,7 +53,7 @@ customElements.define('h-next',
     }
 );
 
-customElements.define('h-prev', 
+customElements.define('h-up', 
     class extends AutoHeader {
         constructor() {
             super(-1);
